@@ -2,42 +2,61 @@
 
 ## 🖥️ GUI工具模块
 
-## **PYQT-GUI**（带有PYQT后缀的）(3+2=5个)
+## **PYQT-GUI**（带有PYQT后缀的）
+**位于.\LineTheroy目录下，基于线性理论，主要面向圆形束流行波管优化**：
 
 - `PYQT_Line_Gain_MAIN-MIXD-COMPLEX_VN_PYQT_`  
       📌 功能：多段行波管频谱计算(仅支持零距离切断)
       🌟 特色功能：数据导入导出、曲线叠绘、自动保存/载入参数、滑块参数调节
 
-  - `🌟PYQT_Line_Gain_MAIN-MIXD-MORECOMPLEX_VN_PYQT_` `🌟(用这个)`
-      📌 功能：多段行波管频谱计算  
+- `🌟PYQT_Line_Gain_MAIN-MIXD-MORECOMPLEX_VN_PYQT_` `🌟(用这个)`
+📌 功能：多段行波管频谱计算  
+🌟 特色功能：数据导入导出、曲线叠绘、自动保存/载入参数、滑块参数调节  
+
+- `🌟PYQT_Line_Gain_MAIN-SINGLE_COMPLEXM_PYQT_``🌟(用这个)`  
+📌 功能：单段行波管频谱计算  
+🌟 特色功能：数据导入导出、曲线叠绘、自动保存/载入参数、滑块参数调节
+    
+**位于.\NolineTheroy\COMMON_THEROY目录下，主要面向圆形束流行波管优化：**
+
+- `🌟PYQT_Noline_GAIN_MAINGUI-SINGLEOPT_PYQT_` `🌟(用这个)`  
+      📌 功能：单段行波管**频谱计算**(非线性理论)  
       🌟 特色功能：数据导入导出、曲线叠绘、自动保存/载入参数、滑块参数调节  
 
-  - `🌟PYQT_Line_Gain_MAIN-SINGLE_COMPLEXM_PYQT_``🌟(用这个)`  
-      📌 功能：单段行波管频谱计算  
+- `PYQT_NOLine_Gain_MAINGUI-MIXD_MIX_PYQT_`  
+📌 功能：分段行波管**频谱计算**(非线性理论)
+
+- `🌟PYQT_Noline_PVTOPT_MAINGUI_MIX_forPVTOPT_PYQT` `🌟(用这个)`  
+      📌 功能：行波管单频点**全周期相速度优化（PVT）**(单段、零距离切断均可[此时默认配置是均匀段-切断-均匀段-切断-{PVT段-PVT段}])(非线性理论)  
       🌟 特色功能：数据导入导出、曲线叠绘、自动保存/载入参数、滑块参数调节
 
-  - `🌟PYQT_Noline_GAIN_MAINGUI-SINGLE_COMPLEXM_SUPER_PYQT_` `(用这个)`  
-      📌 功能：单段行波管频谱计算(非线性理论)  
+**位于.\NolineTheroy\CicularBEAM_SPECIFED_THEROY目录下，只能用于圆形束流行波管优化(SUPER字样)：**
+  - `🌟PYQT_NOLine_Gain_MAINGUI-MIXD_SUPER_MIX_PYQT_` `🌟(用这个)`  
+      📌 功能：**分段**行波管**频谱计算**(非线性理论)
       🌟 特色功能：数据导入导出、曲线叠绘、自动保存/载入参数、滑块参数调节  
 
-    - `PYQT_NoLine_Gain_MAINGUI-MIXD-MORECOMPLEX_VN_PYQT_`  
-    📌 功能：多段行波管频谱计算(非线性理论) 开发中，实现过于困难-图一乐
+    - `PYQT_Noline_GAIN_MAINGUI-SINGLE_SUPER_PYQT_`  
+      📌 功能：**单段**行波管**频谱计算**(非线性理论)  
+      🌟 特色功能：数据导入导出、曲线叠绘、自动保存/载入参数、滑块参数调节  
 
-  ## **特殊GUI**（1+1+2=4个）
 
-  - `_Line_Gain_INIT_VEXTREME_COMPLEX`  
+## **特殊GUI**
+
+**位于.\LineTheroy目录下，基于线性理论，主要面向圆形束流行波管优化**：
+
+  - `Line_Gain_GUI_VCLASSIC`  
+     📌 用途：常规单段行波管单频点计算（基础GUI）
+
+  - `Line_Gain_GUI_VLargePower`  
     📌 用途：大增益单段行波管单频点计算（GUI模式）
 
-  - `Line_Gain_INIT_VCLASSIC`  
-    📌 用途：常规单段行波管单频点计算（基础GUI）
-
-  - `Line_Gain_MAIN-MIXD-SIMPLE_DUAL`  
+  - `Line_Gain_GUI-MIXD_DUAL`  
     📌 用途：常规双段行波管单频点计算（基础GUI）
 
-  - `Line_Gain_MAIN-MIXD-SIMPLE_V3X`  
+  - `Line_Gain_GUI-MIXD-SIMPLE_V3X`  
     📌 用途：常规多段行波管单频点计算（基础GUI）
 
-## 🔧 实用小工具（3+1+2=6个）
+## 🔧 实用小工具
 
 - `MERGE_CSV`  
     📌 用途：合并HFSS计算结果文件（支持本征模式/阻抗-phi/相速-phi等）  
@@ -48,10 +67,11 @@
 
 - `Useful_Tool_CN_calc`  
     📌 用途：简单估计反波起震荡
-      -`Useless_Tool_Calc_SWSWORKING_V0`  
-    📌 用途：简单估计工作点
-      -`Useless_Tool_Pediocd_SWS_Calc`  
-        📌 用途：简单估计周期长度
+  
+-`Useless_Tool_Calc_SWSWORKING_V0`  
+📌 用途：简单估计工作点
+-`Useless_Tool_Pediocd_SWS_Calc`  
+  📌 用途：简单估计周期长度
 
 ---
 
@@ -59,69 +79,67 @@
 
 ---
 
-## 🔧 TEST工具(对非线性理论来说很重要)（4个）
+## 🔧 TEST工具
 
-- `Noline_GAIN_MAINCALL_V2TEST`
-  - 📌 用途：顾名思义，实例化`_TWT_CORE_NOLINE_COMPLEX_V2.py`：
+**位于.\NolineTheroy\COMMON_THEROY目录下，主要面向圆形束流行波管优化：**
+
+- `Noline_GAIN_V2TEST_COMMON`
+  - 📌 用途：顾名思义，实例化`_TWT_CORE_NOLINE_COMPLEX_V2_MIX.py`：
   - 传一组`通用参数`转换非线性理论计算所需的参数，在对结果后处理，可以得到:
+振幅演化，相位演化， 最终速度分布， 最终相位分布，电子相空间图，轴向功率图等结果
+  -通过def para_SWP(isparaSWP, isSAVERESULT, inputP)方法进行自定义单频点的参数扫描：
+        示例：scan_params = {
+            1: [23000,23500,24000],  # 扫描电压V
+            8: [1],  # 扫描填充效率
+        }
+    
+-`Noline_GAIN_V2TEST-MIX_DriftedATTU`
 
-      ```python
-      - print('The Gmax in Noline Theroy is %.4f dB '%(20*np.log10((result['A_Ends']/params['A0']))))
-        print('The Gain in Line Theroy is %.3f dB'%(resultLineG['Gmax']))
-        print('The P_out in Noline Theroy is %.4f,The maximum Efficence is %.4f in percent,The maximum POWER is %.4f in Watt'%(P_Out[-1],Eff,P_max))
-        print(f"The A in the end is {result['A'][-1]}, The u in the end is {np.mean(abs(result['u_final']))}")
-        振幅演化，相位演化， 最终速度分布， 最终相位分布，电子相空间图，轴向功率图等结果
+- 📌 用途：实例化`_TWT_CORE_NOLINE_COMPLEX_V2_MIX.py`，
+- 对包含相速度跳变段**有限距离截断**的分段行波管单频点工作状态进行分析
+- 示例：
+-   ```python ========================= 多段参数配置 =========================
+    SEGMENTS = [
+        {"len": 15, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "initial"},
+        {"len": 15, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "attenuator"},
+        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "attenuator"},
+        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
+        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
+        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
+    ]
+-**Loss_attu = 20 表示衰减量**
+-"type": "attenuator"**表示漂移段(不是SWS)**；"type": "O"表示相速度跳变段也可以配置不进行相速度跳变；"type": "initial"表示起始段
 
-- `Noline_GAIN_MAINCALL_V2SUPERTEST` `🌟(用这个)`
+-`Noline_GAIN_V2TEST-MIX_DriftedATTU`
 
-  - 📌 用途：顾名思义，实例化`_TWT_CORE_NOLINE_COMPLEX_V2SUPER.py`：
-  - 传一组`通用参数`转换非线性理论计算所需的参数，在对结果后处理，可以得到:
+- 📌 用途：实例化`_TWT_CORE_NOLINE_COMPLEX_V2_MIX.py`，
+- 对包含相速度跳变段**零距离截断**的分段行波管单频点工作状态进行分析
+- 示例：
+- ```python
+  SEGMENTS = [
+        {"len": 20, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "initial"},
+        {"len": 20, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "attenuator"},
+        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "attenuator"},
+        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
+        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
+        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
+    ]
+ - "type": "attenuator"表示**起点为截断的SWS**；"type": "O"表示相速度跳变段也可以配置不进行相速度跳变；"type": "initial"表示起始段
+   
 
-    ```python
-    - print('The Gmax in Noline Theroy is %.4f dB '%(20*np.log10((result['A_Ends']/params['A0']))))
-      print('The Gain in Line Theroy is %.3f dB'%(resultLineG['Gmax']))
-      print('The P_out in Noline Theroy is %.4f,The maximum Efficence is %.4f in percent,The maximum POWER is %.4f in Watt'%(P_Out[-1],Eff,P_max))
-      print(f"The A in the end is {result['A'][-1]}, The u in the end is {np.mean(abs(result['u_final']))}")
-      振幅演化，相位演化， 最终速度分布， 最终相位分布，电子相空间图，轴向功率图等结果
+**位于.\NolineTheroy\CicularBEAM_SPECIFED_THEROY目录下，只能用于圆形束流行波管优化：**
 
-- `Noline_GAIN_MAINCALL_V2TEST-MIX_ATTUSUPER` `🌟(非常NB)`
 
-  - 📌 用途：顾名思义，实例化`_TWT_CORE_NOLINE_COMPLEX_V2.py`以及`_TWT_CORE_NOLINE_COMPLEX_V2_MIX`：
-  - 传一组`通用参数`根据相速跳变段的配置情况、截断的配置情况转化为对应`固定参数`+`每段相应参数`:
-  - `固定参数`:`COMMON_PARAMS = {
-            "I": 0.3,          # 电流 (A)
-            "V": 23000,        # 电压 (V)
-            "Loss": 0,         # 损耗
-            "w": 0.20,         # 波导宽度
-            "t": 0.20,         # 波导厚度
-            "Fn_K": 1,         # 归一化因子
-        }`
-  - `每段相应参数`:`{   段X（新增段）
-            "len": 5,# 单元个数
-            "Vpc": 0.288,# 归一化相速
-            "p_SWS": 0.50,# 周期长度(mm)
-            "Kc": 3.6,# 耦合阻抗
-            "f0_GHz": 211# 工作频率 (GHz)
-      }`
+- 包括Noline_GAIN_VSUPERTEST_SINGLE、Noline_GAIN_VSUPERTEST-MIX_ATTUPVT、Noline_GAIN_VSUPERTEST-MIX_DriftedATTU
+ 
+- 与.\NolineTheroy\COMMON_THEROY目录下的三个TEST工具功能分别对应：
 
-  - 并`将上述参数针对每段情况转换成相应非线性理论计算所需的参数`，最后对`结果后处理(合并累加等操作)`，可以得到`总的`:
+- Noline_GAIN_VSUPERTEST_SINGLE用于**单段单频点**分析(主要用来检验慢波单元)
 
-      ```python
-      - print('The Gmax in Noline Theroy is %.4f dB '%(20*np.log10((result['A_Ends']/params['A0']))))
-        print('The Gain in Line Theroy is %.3f dB'%(resultLineG['Gmax']))
-        print('The P_out in Noline Theroy is %.4f,The maximum Efficence is %.4f in percent,The maximum POWER is %.4f in Watt'%(P_Out[-1],Eff,P_max))
-        print(f"The A in the end is {result['A'][-1]}, The u in the end is {np.mean(abs(result['u_final']))}")
-        振幅演化，相位演化， 最终速度分布， 最终相位分布，电子相空间图，轴向功率图等结果
+- Noline_GAIN_VSUPERTEST-MIX_ATTUPVT用于对包含相速度跳变段**零距离截断**的分段行波管单频点工作状态进行分析
 
-  `适用于下列情况`:
-  `情况A`:Uniform-截断-PVT-PVT的复杂行波管`
-  `理论上情况B`:可以扩展到倍频器这种：`Uniform(W band)-截断-Uniform(340 band)-PVT(340 band)`，
-  `理论上情况C`:也可以扩展混合色散这种：`Uniform(W band 强耦合)-截断-Uniform(W band 弱耦合)-PVT(W band 弱耦合)`
-  一般用于`情况A`
+- Noline_GAIN_VSUPERTEST-MIX_DriftedATTU用于对包含相速度跳变段**有限距离截断**的分段行波管单频点工作状态进行分析
 
-- `Noline_GAIN_MAINCALL_V2TEST-MIX_UPER` `🌟(非常NB)`
-  - 📌 用途：与 `Noline_GAIN_MAINCALL_V2TEST-MIX_ATTUSUPER` 类似，不过做了些微简化(不考虑截断)
--
 
 ---
 
@@ -160,12 +178,12 @@
 
 ### **非线性理论核心计算库**（4个）
 
-- `_TWT_CORE_NOLINE_COMPLEX_V2/_TWT_CORE_NOLINE_COMPLEX_V2SUPER`  
+以**位于.\NolineTheroy\COMMON_THEROY目录**为例：
+
+- `_TWT_CORE_NOLINE_COMPLEX_V2_MIX/_TWT_CORE_NOLINE_COMPLEX_VSUPER_MIX`  
     📦 功能：非线性理论核心计算过程  
-- `_TWT_CORE_NOLINE_COMPLEX_V2_MIX`  
-    📦 功能：非线性理论核心计算过程(相速度跳变，截断等等)  
-- `Noline_GAIN_MAINCALL_V2CORE.py`  
-    📦 功能：将`通用参数`转换为_TWT_CORE_NOLINE_COMPLEX_V2.py所需的:
+- `Noline_GAIN_MAINCALL_V2CORE_.py`  
+    📦 功能：将`通用参数`转换为_TWT_CORE_NOLINE_COMPLEX_V2_MIX.py所需的:
 
     ```python
           params = {
@@ -180,26 +198,15 @@
           }等参数,并对结果后处理返回所需的功率P_out,Eff等参数
       适用于无截断单段行波管非线性计算 
        
-- `Noline_GAIN_MAINCALL_V2CORE_SUPER.py`  
+- `Noline_GAIN_MAINCALL_V2CORE_MIX.py`
+    📦 功能：将`通用参数`转换为_TWT_CORE_NOLINE_COMPLEX_V2_MIX.py所需的参数
+  进行零距离截断多端均匀周期行波管分析
+  
+**位于.\NolineTheroy\SHEETBEAM_SPECIFED_THEROY目录**：
 
-    📦 功能：将`通用参数`转换为_TWT_CORE_NOLINE_COMPLEX_V2SUPER.py所需的:
+- _TWT_CORE_NOLINE_COMPLEX_VSHEETBEAM
+包含带状束流行波管空间电荷场的核心求解过程
 
-    ```python
-          params = {
-              "C": C,  # 增益参量
-              "b": b,  # 速度非同步参量
-              "d": d,  # 线路损耗参量
-              "wp_w": wp_omega,  # 相对等离子体频率
-              "beta_space": beta_Space,  # 电子波数beta_space
-              "r_beam": r_beam,
-              "Fill_Rate": Fill_Rate,
-              "p_SWS": p_SWS,
-              "m": 100,  # 电子离散数量
-              "A0": A_0,  # 初始振幅
-              "y_end": L,
-              'Space_cut':2,
-          }等参数，并对结果后处理返回所需的功率P_out,Eff等参数
-      适用于无截断单段行波管非线性计算
 
 ---
 
