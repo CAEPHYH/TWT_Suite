@@ -83,48 +83,49 @@
 
 **位于.\NolineTheroy\COMMON_THEROY目录下，主要面向圆形束流行波管优化：**
 
-- `Noline_GAIN_V2TEST_COMMON`
+- `Noline_GAIN_V2TEST_COMMON`:
+  
   - 📌 用途：顾名思义，实例化`_TWT_CORE_NOLINE_COMPLEX_V2_MIX.py`：
   - 传一组`通用参数`转换非线性理论计算所需的参数，在对结果后处理，可以得到:
 振幅演化，相位演化， 最终速度分布， 最终相位分布，电子相空间图，轴向功率图等结果
-  -通过def para_SWP(isparaSWP, isSAVERESULT, inputP)方法进行自定义单频点的参数扫描：
+  - 通过def para_SWP(isparaSWP, isSAVERESULT, inputP)方法进行自定义单频点的参数扫描：
         示例：scan_params = {
             1: [23000,23500,24000],  # 扫描电压V
             8: [1],  # 扫描填充效率
         }
     
--`Noline_GAIN_V2TEST-MIX_DriftedATTU`
+- `Noline_GAIN_V2TEST-MIX_DriftedATTU`:
 
-- 📌 用途：实例化`_TWT_CORE_NOLINE_COMPLEX_V2_MIX.py`，
-- 对包含相速度跳变段**有限距离截断**的分段行波管单频点工作状态进行分析
-- 示例：
--   ```python ========================= 多段参数配置 =========================
-    SEGMENTS = [
-        {"len": 15, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "initial"},
-        {"len": 15, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "attenuator"},
-        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "attenuator"},
-        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
-        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
-        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
-    ]
--**Loss_attu = 20 表示衰减量**
--"type": "attenuator"**表示漂移段(不是SWS)**；"type": "O"表示相速度跳变段也可以配置不进行相速度跳变；"type": "initial"表示起始段
+      - 📌 用途：实例化`_TWT_CORE_NOLINE_COMPLEX_V2_MIX.py`，
+      - 对包含相速度跳变段**有限距离截断**的分段行波管单频点工作状态进行分析
+      - 示例：
+      -   ```python ========================= 多段参数配置 =========================
+          SEGMENTS = [
+              {"len": 15, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "initial"},
+              {"len": 15, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "attenuator"},
+              {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "attenuator"},
+              {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
+              {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
+              {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
+          ]
+      - **Loss_attu = 20 表示衰减量**
+      - "type": "attenuator"**表示漂移段(不是SWS)**；"type": "O"表示相速度跳变段也可以配置不进行相速度跳变；"type": "initial"表示起始段
 
--`Noline_GAIN_V2TEST-MIX_DriftedATTU`
+- `Noline_GAIN_V2TEST-MIX_DriftedATTU`:
 
-- 📌 用途：实例化`_TWT_CORE_NOLINE_COMPLEX_V2_MIX.py`，
-- 对包含相速度跳变段**零距离截断**的分段行波管单频点工作状态进行分析
-- 示例：
-- ```python
-  SEGMENTS = [
-        {"len": 20, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "initial"},
-        {"len": 20, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "attenuator"},
-        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "attenuator"},
-        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
-        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
-        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
-    ]
- - "type": "attenuator"表示**起点为截断的SWS**；"type": "O"表示相速度跳变段也可以配置不进行相速度跳变；"type": "initial"表示起始段
+      - 📌 用途：实例化`_TWT_CORE_NOLINE_COMPLEX_V2_MIX.py`，
+      - 对包含相速度跳变段**零距离截断**的分段行波管单频点工作状态进行分析
+      - 示例：
+      - ```python
+        SEGMENTS = [
+              {"len": 20, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "initial"},
+              {"len": 20, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "attenuator"},
+              {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "attenuator"},
+              {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
+              {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
+              {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
+          ]
+       - "type": "attenuator"表示**起点为截断的SWS**；"type": "O"表示相速度跳变段也可以配置不进行相速度跳变；"type": "initial"表示起始段
    
 
 **位于.\NolineTheroy\CicularBEAM_SPECIFED_THEROY目录下，只能用于圆形束流行波管优化：**
@@ -145,7 +146,7 @@
 
 ## ⚙️ 核心计算函数库(CORE字样)(4+4=8个左右)
 
-### **线性理论核心计算库**（4个）
+### **线性理论核心计算库**
 
 - `solve_TWTChara`  
     📦 功能：大增益场景核心求解过程  
@@ -153,7 +154,7 @@
     📦 功能：零距离截断线性理论计算  
 - `TWT_CORE_MORE_COMPLEX`  
     📦 功能：非零距离截断线性理论计算  
-- `TWT_CORE_SIMP`谨慎修改
+- `TWT_CORE_SIMP`
   - 📦功能：(
   - 包括多个函数谨慎修改：
   - 其中def detailed_calculation()用于无截断线性理论计算；
@@ -176,7 +177,7 @@
         }参数
   - )
 
-### **非线性理论核心计算库**（4个）
+### **非线性理论核心计算库**
 
 以**位于.\NolineTheroy\COMMON_THEROY目录**为例：
 
