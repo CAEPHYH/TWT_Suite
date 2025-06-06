@@ -59,7 +59,7 @@ def Noline_CORE_CALC(I, V, Kc, Loss, p_SWS, N_unit, w, t, Fn_K, f0_GHz, Vpc):
             R = initparamater["等离子体频率降低因子Fn"]
         L = 2 * np.pi * initparamater["互作用长度N"] * C
 
-        P_in = 0.1
+        P_in = 0.10
         P_flux = C * inputP[0] * inputP[1] * 2
         A_0 = np.sqrt(P_in / P_flux)
 

@@ -154,7 +154,7 @@ def calculate_SEGMENT_TWT_NOLINE_SECTIONED_for_PVTOPT(
     P_in=0.1,
     IsZeroSectioned=1,
     Loss_attu=20,
-    SectionedSEGMENT_IDX=[1,2]
+    SectionedSEGMENT_IDX=[1,4]
 ):
     """
     计算分段TWT非线性输出功率

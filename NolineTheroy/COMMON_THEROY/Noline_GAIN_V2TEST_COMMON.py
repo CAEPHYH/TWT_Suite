@@ -11,17 +11,17 @@ from Noline_GAIN_MAINCALL_V2CORE_ import Noline_CORE_CALC
 if __name__ == "__main__":
     # 计算物理参数
     inputP = [
-        0.3,  # I: Any
-        23000,  # V: Any
-        3.6,  # Kc: Any
+        0.41,  # I: Any
+        25000,  # V: Any
+        1.484148374062532,  # Kc: Any
         0,  # Loss: Any
-        0.5,  # p_SWS: Any
-        50,  # N_unit: Any
-        0.2,  # w: Any
-        0.2,  # t: Any
-        1,  # Fill_Rate: Any
+        0.75,  # p_SWS: Any
+        33,  # N_unit: Any
+        0.72,  # w: Any
+        0.12,  # t: Any
+        1.25,  # Fill_Rate: Any
         211,  # f0_GHz: Any
-        0.285,  # Vpc: Any
+        0.29728211903571433,  # Vpc: Any
     ]
     print(
         inputP

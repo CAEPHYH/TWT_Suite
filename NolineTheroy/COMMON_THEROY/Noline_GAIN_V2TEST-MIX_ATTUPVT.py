@@ -8,19 +8,21 @@ from _TWT_CORE_NOLINE_COMPLEX_V2_MIX import solveTWTNOLINE_OUTPUT, solveTWTNOLIN
 def main():
     # ========================= 多段参数配置 =========================
     SEGMENTS = [
-        {"len": 15, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "initial"},
-        {"len": 15, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "attenuator"},
-        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "attenuator"},
-        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
-        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
-        {"len": 5, "Vpc": 0.285, "p_SWS": 0.50, "Kc": 3.6, "f0_GHz": 211, "type": "O"},
+        {"len": 20, "Vpc": 0.287, "p_SWS": 0.50, "Kc": 2, "f0_GHz": 211, "type": "initial"},
+        {"len": 10, "Vpc": 0.287, "p_SWS": 0.50, "Kc": 2, "f0_GHz": 211, "type": "attenuator"},
+        {"len": 5, "Vpc": 0.287, "p_SWS": 0.50, "Kc": 2, "f0_GHz": 211, "type": "O"},
+        {"len": 5, "Vpc": 0.287, "p_SWS": 0.50, "Kc": 2, "f0_GHz": 211, "type": "O"},
+        {"len": 5, "Vpc": 0.287, "p_SWS": 0.50, "Kc": 2, "f0_GHz": 211, "type": "attenuator"},
+        {"len": 5, "Vpc": 0.287, "p_SWS": 0.50, "Kc": 2, "f0_GHz": 211, "type": "O"},
+        {"len": 5, "Vpc": 0.287, "p_SWS": 0.50, "Kc": 2, "f0_GHz": 211, "type": "O"},
+        {"len": 5, "Vpc": 0.287, "p_SWS": 0.50, "Kc": 2, "f0_GHz": 211, "type": "O"},
     ]
-    Loss_attu = 0
+    Loss_attu = 20
 
     # ========================= 全局参数 =========================
     COMMON_PARAMS = {
         "I": 0.3, "V": 23000, "Loss": 0,
-        "w": 0.20, "t": 0.20, "Fn_K": 1
+        "w": 0.40, "t": 0.10, "Fn_K": 1
     }
 
     # ========================= 主计算逻辑 =========================
@@ -47,6 +49,7 @@ def main():
             "m": 100,
             "y_end": L + (results[-1]["y"][-1] if seg_idx > 0 else 0)
         }
+        print(params)
 
         # 分段处理
         if seg["type"] == "initial":
