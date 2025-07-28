@@ -193,8 +193,8 @@ if __name__ == "__main__":
         1.45,  # Kc
         0,  # Loss_perunit
         [1],  # SectionedSEGMENT_IDX (衰减段索引,值一般为奇数)
-        [0.75],  # p_SWS,大小为n的数组维度与N_unit保持一致
-        [35],  # N_unit，大小为n的数组
+        [0.71,0.705,0.700,0.695,0.690],  # p_SWS,大小为n的数组维度与N_unit保持一致
+        [30,5,5,5,5],  # N_unit，大小为n的数组
         0.72,  # w
         0.12,  # t
         1.20,  # Fill_Rate

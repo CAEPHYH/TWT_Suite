@@ -8,19 +8,19 @@ from _TWT_CORE_NOLINE_COMPLEX_VSHEETBEAM import solveTWTNOLINE_Drift,solveTWTNOL
 def main():
     # ========================= 多段参数配置 =========================
     SEGMENTS = [
-        {"len": 30, "Vpc": 0.290, "p_SWS": 0.50, "Kc": 3.6, "Fn_K": 1.2,"Loss_perunit": 0, "type": "initial"},
-        {"len": 5, "Vpc": 0.287622, "p_SWS": 0.495, "Kc": 3.54, "Fn_K": 1.2,"Loss_perunit": 0, "type": "attenuator"},
-        {"len": 5, "Vpc": 0.287, "p_SWS": 0.150, "Kc": 3.0, "Fn_K": 1,"Loss_perunit": 0.1, "type": "O"},
-        {"len": 5, "Vpc": 0.2791553333333333, "p_SWS": 0.145, "Kc": 2.84, "Fn_K": 1,"Loss_perunit": 0.1, "type": "attenuator"},
-        {"len": 5, "Vpc": 0.2713106666666667, "p_SWS": 0.140, "Kc": 2.68, "Fn_K": 1,"Loss_perunit": 0.1, "type": "O"},
+        {"len": 30, "Vpc": 0.2967, "p_SWS": 0.71, "Kc": 1.45, "Fn_K": 1.2,"Loss_perunit": 0, "type": "initial"},
+        {"len": 5, "Vpc": 0.29607316901408454, "p_SWS": 0.705, "Kc": 1.4408098591549294, "Fn_K": 1.2,"Loss_perunit": 0, "type": "attenuator"},
+        {"len": 5, "Vpc": 0.29544633802816905, "p_SWS": 0.70, "Kc": 1.4316197183098591, "Fn_K": 1.2,"Loss_perunit": 0, "type": "O"},
+        {"len": 5, "Vpc": 0.2948195070422535, "p_SWS": 0.695, "Kc": 1.4224295774647886, "Fn_K": 1.2,"Loss_perunit": 0, "type": "O"},
+        {"len": 5, "Vpc": 0.29419267605633803, "p_SWS": 0.690, "Kc": 1.4132394366197183, "Fn_K": 1.2,"Loss_perunit": 0, "type": "O"},
     ]
-    Loss_attu = 15
+    Loss_attu = 20
     P_in = 0.1 #输入功率Pin
 
     # ========================= 全局参数 =========================
     COMMON_PARAMS = {
-        "I": 0.3, "V": 23000, 
-        "w": 0.45, "t": 0.10, "f0_GHz": 211
+        "I": 0.41, "V": 25000, 
+        "w": 0.72, "t": 0.12, "f0_GHz": 210
     }
 
     # ========================= 主计算逻辑 =========================
@@ -31,8 +31,9 @@ def main():
     for seg_idx, seg in enumerate(SEGMENTS):
         # 参数计算
         input_params = build_input_params(COMMON_PARAMS, seg)
+        print(f"\n段{seg_idx}计算参数:\n{input_params}")
         calc_result = simple_calculation(*input_params)
-        print(f"\n段{seg_idx}计算参数:\n{calc_result}")
+
         
         # 缓存公共参数
         C = calc_result["小信号增益因子C"]
@@ -52,7 +53,7 @@ def main():
             "m": 50,
             "y_end": L + (results[-1]["y"][-1] if seg_idx > 0 else 0)
         }
-        print(params)
+        print(f"段{seg_idx}求解器参数:\n{params}")
 
         # 分段处理
         if seg["type"] == "initial":
