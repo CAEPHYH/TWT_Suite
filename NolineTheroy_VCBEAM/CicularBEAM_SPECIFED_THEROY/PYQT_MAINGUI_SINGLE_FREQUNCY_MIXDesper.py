@@ -1,11 +1,10 @@
-
 import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import pandas as pd  # 添加pandas库
-from datetime import datetime  # 添加日期时间库
+import pandas as pd
+from datetime import datetime
 import os
 
 from TWT_CORE_SIMP import simple_calculation
@@ -37,7 +36,7 @@ class TWT_GUI:
         
         # 加载默认参数
         self.default_segments = [
-            {"len": 50, "Vpc": 0.2893, "p_SWS": 0.50, "Kc": 3.88, "f0_GHz": 211, "Loss_perunit": 0, "Fn_K": 1, "type": "initial"},
+            {"len": 50, "Vpc": 0.2893, "p_SWS": 0.50, "Kc": 3.88, "Loss_perunit": 0, "Fn_K": 1, "type": "initial"},
         ]
         
         self.load_defaults()
@@ -48,6 +47,7 @@ class TWT_GUI:
         global_frame = ttk.LabelFrame(self.input_frame, text="全局参数")
         global_frame.pack(fill=tk.X, padx=5, pady=5)
         
+        # 第1行
         # 电流 I
         ttk.Label(global_frame, text="电流 I (A):").grid(row=0, column=0, padx=5, pady=2, sticky=tk.W)
         self.I_var = tk.DoubleVar(value=0.3)
@@ -58,11 +58,12 @@ class TWT_GUI:
         self.V_var = tk.DoubleVar(value=23000)
         ttk.Entry(global_frame, textvariable=self.V_var, width=10).grid(row=0, column=3, padx=5, pady=2)
         
-        # 输入功率 P_in - 新添加的全局参数
-        ttk.Label(global_frame, text="输入功率 P_in (W):").grid(row=0, column=4, padx=5, pady=2, sticky=tk.W)
-        self.P_in_var = tk.DoubleVar(value=0.10)  # 默认值0.004W
-        ttk.Entry(global_frame, textvariable=self.P_in_var, width=10).grid(row=0, column=5, padx=5, pady=2)
+        # 工作频率
+        ttk.Label(global_frame, text="频率 f0 (GHz):").grid(row=0, column=4, padx=5, pady=2, sticky=tk.W)
+        self.f0_var = tk.DoubleVar(value=211)  # 新增频率参数
+        ttk.Entry(global_frame, textvariable=self.f0_var, width=10).grid(row=0, column=5, padx=5, pady=2)
         
+        # 第2行
         # 宽度 w
         ttk.Label(global_frame, text="宽度 w (mm):").grid(row=1, column=0, padx=5, pady=2, sticky=tk.W)
         self.w_var = tk.DoubleVar(value=0.2)
@@ -73,17 +74,24 @@ class TWT_GUI:
         self.t_var = tk.DoubleVar(value=0.2)
         ttk.Entry(global_frame, textvariable=self.t_var, width=10).grid(row=1, column=3, padx=5, pady=2)
         
+        # 输入功率 P_in
+        ttk.Label(global_frame, text="输入功率 P_in (W):").grid(row=1, column=4, padx=5, pady=2, sticky=tk.W)
+        self.P_in_var = tk.DoubleVar(value=0.10)
+        ttk.Entry(global_frame, textvariable=self.P_in_var, width=10).grid(row=1, column=5, padx=5, pady=2)
+        
+        # 第3行
         # Loss_attu 参数
-        ttk.Label(global_frame, text="Loss_attu:").grid(row=1, column=4, padx=5, pady=2, sticky=tk.W)
+        ttk.Label(global_frame, text="Loss_attu:").grid(row=2, column=0, padx=5, pady=2, sticky=tk.W)
         self.loss_attu_var = tk.DoubleVar(value=0)
-        ttk.Entry(global_frame, textvariable=self.loss_attu_var, width=10).grid(row=1, column=5, padx=5, pady=2)
+        ttk.Entry(global_frame, textvariable=self.loss_attu_var, width=10).grid(row=2, column=1, padx=5, pady=2)
         
         # 分段参数表头
         segment_header = ttk.LabelFrame(self.input_frame, text="分段参数")
         segment_header.pack(fill=tk.X, padx=5, pady=5)
         
-        columns = ("len", "Vpc", "p_SWS", "Kc", "f0_GHz", "Loss_perunit", "Fn_K", "type")
-        headers = ("周期数(个)", "Vpc", "螺距(mm)", "耦合阻抗", "频率(GHz)", "每单元损耗", "填充因子", "类型")
+        # 更新列定义（移除了f0_GHz列）
+        columns = ("len", "Vpc", "p_SWS", "Kc", "Loss_perunit", "Fn_K", "type")
+        headers = ("周期数(个)", "Vpc", "螺距(mm)", "耦合阻抗", "每单元损耗", "填充因子", "类型")
         
         for col, header in enumerate(headers):
             ttk.Label(segment_header, text=header, width=10).grid(row=0, column=col, padx=2, pady=2)
@@ -92,7 +100,7 @@ class TWT_GUI:
         self.segment_entries = []
         entry_frames = []
         
-        for i in range(10):  # 最多6个分段
+        for i in range(10):  # 最多10个分段
             entry_frame = ttk.Frame(self.input_frame)
             entry_frame.pack(fill=tk.X, padx=5, pady=2)
             entry_frames.append(entry_frame)
@@ -109,9 +117,9 @@ class TWT_GUI:
         # 类型选择列添加下拉菜单
         type_options = ["initial", "attenuator", "O"]
         for i, entry_frame in enumerate(entry_frames):
-            var = self.segment_entries[i][7]  # 第7列是类型
+            var = self.segment_entries[i][6]  # 第6列是类型
             combo = ttk.Combobox(entry_frame, textvariable=var, values=type_options, width=8)
-            combo.grid(row=0, column=7, padx=2, pady=2)
+            combo.grid(row=0, column=len(columns)-1, padx=2, pady=2)
         
         # 控制按钮
         button_frame = ttk.Frame(self.input_frame)
@@ -154,7 +162,8 @@ class TWT_GUI:
         # 全局参数
         self.I_var.set(0.3)
         self.V_var.set(23000)
-        self.P_in_var.set(0.10)  # P_in默认值
+        self.f0_var.set(211)  # 频率默认值
+        self.P_in_var.set(0.10)
         self.w_var.set(0.2)
         self.t_var.set(0.2)
         self.loss_attu_var.set(0)
@@ -162,14 +171,12 @@ class TWT_GUI:
         # 分段参数 - 只加载第一个分段（初始段）
         seg_data = self.default_segments[0]
         
-        self.segment_entries[0][0].set(seg_data["len"])
-        self.segment_entries[0][1].set(seg_data["Vpc"])
-        self.segment_entries[0][2].set(seg_data["p_SWS"])
-        self.segment_entries[0][3].set(seg_data["Kc"])
-        self.segment_entries[0][4].set(seg_data["f0_GHz"])
-        self.segment_entries[0][5].set(seg_data["Loss_perunit"])
-        self.segment_entries[0][6].set(seg_data["Fn_K"])
-        self.segment_entries[0][7].set(seg_data["type"])
+        # 设置除类型外的数值参数
+        for i, param in enumerate(["len", "Vpc", "p_SWS", "Kc", "Loss_perunit", "Fn_K"]):
+            self.segment_entries[0][i].set(seg_data[param])
+        
+        # 设置类型
+        self.segment_entries[0][6].set(seg_data["type"])
         
         # 清空其他分段
         for i in range(1, len(self.segment_entries)):
@@ -181,7 +188,8 @@ class TWT_GUI:
         # 全局参数
         self.I_var.set("")
         self.V_var.set("")
-        self.P_in_var.set("")  # 重置P_in
+        self.f0_var.set("")  # 重置频率
+        self.P_in_var.set("")
         self.w_var.set("")
         self.t_var.set("")
         self.loss_attu_var.set("")
@@ -212,7 +220,8 @@ class TWT_GUI:
             COMMON_PARAMS = {
                 "I": self.I_var.get(),
                 "V": self.V_var.get(),
-                "P_in": self.P_in_var.get(),  # 获取输入功率
+                "f0": self.f0_var.get(),  # 获取频率
+                "P_in": self.P_in_var.get(),
                 "w": self.w_var.get(),
                 "t": self.t_var.get(),
             }
@@ -220,9 +229,9 @@ class TWT_GUI:
             # 获取Loss_attu参数
             Loss_attu = self.loss_attu_var.get()
             
-            # 获取分段参数
+            # 获取分段参数（移除了f0_GHz列）
             SEGMENTS = []
-            columns = ("len", "Vpc", "p_SWS", "Kc", "f0_GHz", "Loss_perunit", "Fn_K", "type")
+            columns = ("len", "Vpc", "p_SWS", "Kc", "Loss_perunit", "Fn_K", "type")
             
             for row in self.segment_entries:
                 # 检查是否有有效输入
@@ -290,7 +299,8 @@ class TWT_GUI:
                     "C": C, 
                     "b": calc_result["非同步参量b"],
                     "d": calc_result["损耗因子d"],
-                    "wp_w": calc_result["等离子体频率Wp"] / (2 * np.pi * seg["f0_GHz"] * 1e9),
+                    # 使用全局频率值
+                    "wp_w": calc_result["等离子体频率Wp"] / (2 * np.pi * COMMON_PARAMS["f0"] * 1e9),
                     "beta_space": calc_result["beta_Space"],
                     "r_beam": calc_result["束流归一化尺寸r_beam"],
                     "Fill_Rate": seg["Fn_K"],
@@ -319,7 +329,7 @@ class TWT_GUI:
             messagebox.showerror("计算错误", f"计算过程中出错: {str(e)}")
     
     def build_input_params(self, common_params, seg):
-        """构建输入参数列表"""
+        """构建输入参数列表 - 使用全局频率值"""
         return [
             common_params["I"], 
             common_params["V"], 
@@ -330,7 +340,7 @@ class TWT_GUI:
             common_params["w"], 
             common_params["t"],
             seg["Fn_K"], 
-            seg["f0_GHz"], 
+            common_params["f0"],  # 使用全局频率值
             seg["Vpc"]
         ]
 
@@ -344,7 +354,7 @@ class TWT_GUI:
             "y_end": 2 * np.pi * calc_result["互作用长度N"] * params["C"]
         })
         self.result_text.insert(tk.END, f"\n初始段参数:\n{params}\n")
-        self.result_text.insert(tk.END, f"使用输入功率: {P_in} W\n")  # 添加日志
+        self.result_text.insert(tk.END, f"使用输入功率: {P_in} W\n")
         results.append(solveTWTNOLINE_INIT(**params))
         self.result_text.update()
 
@@ -401,8 +411,9 @@ class TWT_GUI:
         # 显示最终结果
         self.result_text.config(state=tk.NORMAL)
         self.result_text.insert(tk.END, "\n======== 最终计算结果 ========\n")
-        self.result_text.insert(tk.END, f"输入功率: {common_params['P_in']} W\n")  # 显示输入功率
-        self.result_text.insert(tk.END, f"非线性理论增益: {10 * np.log10(P_Out[-1]/common_params['P_in']):.4f} dB\n")  # 使用输入功率计算增益
+        self.result_text.insert(tk.END, f"工作频率: {common_params['f0']} GHz\n")  # 显示频率
+        self.result_text.insert(tk.END, f"输入功率: {common_params['P_in']} W\n")
+        self.result_text.insert(tk.END, f"非线性理论增益: {10 * np.log10(P_Out[-1]/common_params['P_in']):.4f} dB\n")
         self.result_text.insert(tk.END, f"输出功率: {P_Out[-1]:.4f} W\n")
         self.result_text.insert(tk.END, f"最大效率: {Eff_max:.4f}%\n")
         self.result_text.insert(tk.END, f"最大功率: {P_max:.4f} W\n")
